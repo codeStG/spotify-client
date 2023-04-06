@@ -1,5 +1,6 @@
 package com.stgcodes.client.spotify.service;
 
+import com.stgcodes.client.spotify.model.Artist;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -14,12 +15,12 @@ public class ArtistService {
         this.webClient = webClient;
     }
 
-    public Mono<String> findById(String id) {
+    public Mono<Artist> findById(String id) {
 
         return webClient.get()
                 .uri("/artists/{id}", id)
                 .attributes(clientRegistrationId("spotify"))
                 .retrieve()
-                .bodyToMono(String.class);
+                .bodyToMono(Artist.class);
     }
 }
