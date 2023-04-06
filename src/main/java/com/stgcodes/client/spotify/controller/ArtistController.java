@@ -1,6 +1,5 @@
 package com.stgcodes.client.spotify.controller;
 
-import com.stgcodes.client.spotify.model.Artist;
 import com.stgcodes.client.spotify.service.ArtistService;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
