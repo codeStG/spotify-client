@@ -23,7 +23,6 @@ public class WebClientConfig {
                 .build();
     }
 
-
     private ExchangeFilterFunction logFilter() {
         return (clientRequest, next) -> {
             log.info("***********************************");
