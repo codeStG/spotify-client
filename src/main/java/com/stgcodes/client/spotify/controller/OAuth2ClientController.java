@@ -18,7 +18,8 @@ public class OAuth2ClientController {
 
     @GetMapping("/")
     public Mono<String> index(Authentication authentication) {
-        return this.authorizedClientService.loadAuthorizedClient("spotify", authentication.getName())
+        return this.authorizedClientService
+                .loadAuthorizedClient("spotify", authentication.getName())
                 .map(OAuth2AuthorizedClient::getAccessToken)
                 .thenReturn("index");
     }
