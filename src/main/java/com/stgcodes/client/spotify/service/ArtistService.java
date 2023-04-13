@@ -19,7 +19,6 @@ public class ArtistService {
     }
 
     public Mono<Artist> findById(String id) {
-
         return webClient.get()
                 .uri("/artists/{id}", id)
                 .attributes(clientRegistrationId("spotify"))
