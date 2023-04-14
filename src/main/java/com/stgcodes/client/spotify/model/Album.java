@@ -3,7 +3,9 @@ package com.stgcodes.client.spotify.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.stgcodes.client.spotify.deserializer.CustomDateDeserializer;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -19,6 +21,7 @@ public class Album {
     private int totalTracks;
 
     @JsonFormat(pattern = "uuuu-MM-dd")
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     private LocalDate releaseDate;
 
     @JsonIgnoreProperties(value = { "popularity", "total_followers", "genres" })
