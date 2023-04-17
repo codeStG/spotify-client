@@ -19,6 +19,7 @@ public class Album {
     private String name;
 
     private int totalTracks;
+    private int popularity;
 
     @JsonFormat(pattern = "uuuu-MM-dd")
     @JsonDeserialize(using = CustomDateDeserializer.class)
