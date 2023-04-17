@@ -8,30 +8,19 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-import static org.springframework.security.oauth2.client.web.reactive.function.client.ServerOAuth2AuthorizedClientExchangeFilterFunction.clientRegistrationId;
-
 @Service
-public class ArtistService {
-    private final WebClient webClient;
+public class ArtistService extends GenericService<Artist, ArtistsWrapper> {
 
     public ArtistService(WebClient webClient) {
-        this.webClient = webClient;
+        super(webClient, Artist.class, ArtistsWrapper.class);
     }
 
     public Mono<Artist> findById(String id) {
-        return webClient.get()
-                .uri("/artists/{id}", id)
-                .attributes(clientRegistrationId("spotify"))
-                .retrieve()
-                .bodyToMono(Artist.class);
+        return requestSingleValue("/artists/" + id);
     }
 
     public Mono<List<Artist>> findAll(String ids) {
-        return webClient.get()
-                .uri("/artists?ids={ids}", ids)
-                .attributes(clientRegistrationId("spotify"))
-                .retrieve()
-                .bodyToMono(ArtistsWrapper.class)
+        return requestMultipleValues("/artists?ids=" + ids)
                 .map(ArtistsWrapper::getArtists);
     }
 }
