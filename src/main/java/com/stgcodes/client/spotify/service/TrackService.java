@@ -1,7 +1,5 @@
 package com.stgcodes.client.spotify.service;
 
-import com.stgcodes.client.spotify.model.Album;
-import com.stgcodes.client.spotify.model.AlbumsWrapper;
 import com.stgcodes.client.spotify.model.Track;
 import com.stgcodes.client.spotify.model.TracksWrapper;
 import org.springframework.stereotype.Service;

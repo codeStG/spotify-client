@@ -1,6 +1,5 @@
 package com.stgcodes.client.spotify.controller;
 
-import com.stgcodes.client.spotify.model.Album;
 import com.stgcodes.client.spotify.model.Track;
 import com.stgcodes.client.spotify.service.TrackService;
 import org.springframework.web.bind.annotation.*;
