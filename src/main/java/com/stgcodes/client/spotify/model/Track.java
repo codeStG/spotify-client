@@ -21,7 +21,7 @@ public class Track {
 
     private int trackNumber;
 
-    @JsonIgnoreProperties(value = { "popularity", "artists" })
+    @JsonIgnoreProperties(value = { "popularity", "artists", "tracks" })
     private Album album;
 
     @JsonIgnoreProperties(value = { "popularity", "total_followers", "genres" })
