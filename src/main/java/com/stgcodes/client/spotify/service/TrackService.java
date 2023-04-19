@@ -1,7 +1,7 @@
 package com.stgcodes.client.spotify.service;
 
 import com.stgcodes.client.spotify.model.Track;
-import com.stgcodes.client.spotify.model.TracksWrapper;
+import com.stgcodes.client.spotify.model.wrapper.TracksWrapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;

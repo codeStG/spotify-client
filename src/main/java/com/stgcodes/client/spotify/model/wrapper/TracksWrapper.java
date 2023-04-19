@@ -1,7 +1,8 @@
-package com.stgcodes.client.spotify.model;
+package com.stgcodes.client.spotify.model.wrapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.stgcodes.client.spotify.model.Track;
 import lombok.Data;
 
 import java.util.List;
