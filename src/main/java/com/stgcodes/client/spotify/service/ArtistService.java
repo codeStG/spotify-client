@@ -1,26 +1,26 @@
 package com.stgcodes.client.spotify.service;
 
 import com.stgcodes.client.spotify.model.Artist;
+import com.stgcodes.client.spotify.model.wrapper.ArtistsWrapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import static org.springframework.security.oauth2.client.web.reactive.function.client.ServerOAuth2AuthorizedClientExchangeFilterFunction.clientRegistrationId;
+import java.util.List;
 
 @Service
-public class ArtistService {
-    private final WebClient webClient;
+public class ArtistService extends GenericService<Artist, ArtistsWrapper> {
 
     public ArtistService(WebClient webClient) {
-        this.webClient = webClient;
+        super(webClient, Artist.class, ArtistsWrapper.class);
     }
 
     public Mono<Artist> findById(String id) {
+        return requestSingleValue("/artists/" + id);
+    }
 
-        return webClient.get()
-                .uri("/artists/{id}", id)
-                .attributes(clientRegistrationId("spotify"))
-                .retrieve()
-                .bodyToMono(Artist.class);
+    public Mono<List<Artist>> findAll(String ids) {
+        return requestMultipleValues("/artists?ids=" + ids)
+                .map(ArtistsWrapper::getArtists);
     }
 }

@@ -1,30 +1,31 @@
 package com.stgcodes.client.spotify.controller;
 
-import com.stgcodes.client.spotify.model.Artist;
-import com.stgcodes.client.spotify.service.ArtistService;
+import com.stgcodes.client.spotify.model.Track;
+import com.stgcodes.client.spotify.service.TrackService;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/artist")
-public class ArtistController {
+@RequestMapping("/track")
+public class TrackController {
 
-    private final ArtistService service;
+    private final TrackService service;
 
-    public ArtistController(ArtistService service) {
+    public TrackController(TrackService service) {
         this.service = service;
     }
 
     @GetMapping
-    @ResponseBody Mono<Artist>
+    @ResponseBody
+    Mono<Track>
     findById(@RequestParam(value = "id", defaultValue = "") String id) {
         return service.findById(id);
     }
 
     @GetMapping(params = "ids")
-    @ResponseBody Mono<List<Artist>>
+    @ResponseBody Mono<List<Track>>
     findAll(@RequestParam(value = "ids", defaultValue = "") String ids) {
         return service.findAll(ids);
     }
