@@ -19,4 +19,6 @@ public class TrackEntity {
     private int trackNumber;
 
     private AlbumEntity album;
+
+    private List<ArtistEntity> artists;
 }

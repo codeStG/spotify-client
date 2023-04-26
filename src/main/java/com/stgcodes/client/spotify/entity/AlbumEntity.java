@@ -29,4 +29,8 @@ public class AlbumEntity {
 
     @JsonFormat(pattern = "uuuu-MM-dd")
     private LocalDate releaseDate;
+
+    private List<ArtistEntity> artists;
+
+    private List<TrackEntity> tracks;
 }
