@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -68,7 +69,7 @@ public class AlbumEntity {
 
     private int popularity;
 
-    private Object[] artists;
+    private List<ArtistEntity> artists;
 
     private Object tracks;
 }
