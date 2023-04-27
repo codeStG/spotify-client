@@ -11,26 +11,33 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @Service
-public class AlbumService extends GenericService<Album, AlbumsWrapper> {
+public class AlbumService extends GenericService<AlbumEntity, AlbumsWrapper> {
 
     private final AlbumRepository repository;
 
     public AlbumService(WebClient webClient, AlbumRepository repository) {
-        super(webClient, Album.class, AlbumsWrapper.class);
+        super(webClient, AlbumEntity.class, AlbumsWrapper.class);
         this.repository = repository;
     }
 
-    public Mono<AlbumEntity> findById(String id) {
-        return repository.findById(id)
+    public Mono<Album> findById(String id) {
+        Mono<AlbumEntity> albumEntity = repository.findById(id)
                 .switchIfEmpty(requestSingleValue("/albums/" + id)
-                        .map(album -> AlbumEntity.builder()
-                                .id(album.getId())
-                                .name(album.getName())
-                                .totalTracks(album.getTotalTracks())
-                                .popularity(album.getPopularity())
-                                .releaseDate(album.getReleaseDate())
-                                .build()))
-                .flatMap(repository::save);
+                        .flatMap(repository::save));
+
+        return entityToDto(albumEntity);
+    }
+
+    private Mono<Album> entityToDto(Mono<AlbumEntity> albumEntity) {
+        return albumEntity.map(entity -> Album.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .totalTracks(entity.getTotalTracks())
+                .popularity(entity.getPopularity())
+                .releaseDate(entity.getReleaseDate())
+//                .artists(null)
+//                .tracks(null)
+                .build());
     }
 
     public Mono<List<Album>> findAll(String ids) {
