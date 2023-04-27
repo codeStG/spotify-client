@@ -3,6 +3,7 @@ package com.stgcodes.client.spotify.service;
 import com.stgcodes.client.spotify.entity.AlbumEntity;
 import com.stgcodes.client.spotify.model.Album;
 import com.stgcodes.client.spotify.model.Artist;
+import com.stgcodes.client.spotify.model.Track;
 import com.stgcodes.client.spotify.model.wrapper.AlbumsWrapper;
 import com.stgcodes.client.spotify.repository.AlbumRepository;
 import org.springframework.stereotype.Service;
@@ -37,10 +38,18 @@ public class AlbumService extends GenericService<AlbumEntity, AlbumsWrapper> {
             Artist.builder()
                     .id(artistEntity.getId())
                     .name(artistEntity.getName())
-                    .popularity(artistEntity.getPopularity())
-//                        .totalFollowers(null)
-                    .genres(artistEntity.getGenres())
                     .build()));
+
+            List<Track> tracks = new ArrayList<>();
+            entity.getTracks().forEach(trackEntity -> tracks.add(
+                    Track.builder()
+                            .id(trackEntity.getId())
+                            .name(trackEntity.getName())
+                            .popularity(trackEntity.getPopularity())
+                            .discNumber(trackEntity.getDiscNumber())
+                            .trackNumber(trackEntity.getTrackNumber())
+//                            .artists(null)
+                            .build()));
 
             return Album.builder()
                 .id(entity.getId())
@@ -49,7 +58,7 @@ public class AlbumService extends GenericService<AlbumEntity, AlbumsWrapper> {
                 .popularity(entity.getPopularity())
                 .releaseDate(entity.getReleaseDate())
                 .artists(artists)
-//                .tracks(null)
+                .tracks(tracks)
                 .build();
         });
     }

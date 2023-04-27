@@ -20,7 +20,8 @@ public class TrackService extends GenericService<Track, TracksWrapper> {
     }
 
     public Mono<List<Track>> findAll(String ids) {
-        return requestMultipleValues("/tracks?ids=" + ids)
-                .map(TracksWrapper::getTracks);
+//        return requestMultipleValues("/tracks?ids=" + ids)
+//                .map(TracksWrapper::getTracks);
+        return null;
     }
 }
