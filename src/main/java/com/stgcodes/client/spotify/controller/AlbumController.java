@@ -1,6 +1,5 @@
 package com.stgcodes.client.spotify.controller;
 
-import com.stgcodes.client.spotify.entity.AlbumEntity;
 import com.stgcodes.client.spotify.model.Album;
 import com.stgcodes.client.spotify.service.AlbumService;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,7 @@ public class AlbumController {
     }
 
     @GetMapping
-    @ResponseBody Mono<AlbumEntity>
+    @ResponseBody Mono<Album>
     findById(@RequestParam(value = "id", defaultValue = "") String id) {
         return service.findById(id);
     }
