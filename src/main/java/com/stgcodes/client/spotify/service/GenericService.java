@@ -14,6 +14,7 @@ import java.util.List;
 
 import static org.springframework.security.oauth2.client.web.reactive.function.client.ServerOAuth2AuthorizedClientExchangeFilterFunction.clientRegistrationId;
 
+//TODO: Extract entityToModel out to their respective service classes; make the method abstract
 public abstract class GenericService<T, V> {
 
     private final WebClient webClient;
@@ -77,6 +78,8 @@ public abstract class GenericService<T, V> {
                 .popularity(trackEntity.getPopularity())
                 .discNumber(trackEntity.getDiscNumber())
                 .trackNumber(trackEntity.getTrackNumber())
+                //TODO: create simplified model classes for objects contained within objects
+//                .album(null)
                 .artists(artists)
                 .build();
     }
