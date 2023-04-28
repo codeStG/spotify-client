@@ -42,24 +42,22 @@ public abstract class GenericService<T, V> {
                 .bodyToMono(modelWrapperType);
     }
 
-    Mono<Album> entityToModel(Mono<AlbumEntity> albumEntity) {
-        return albumEntity.map(entity -> {
-            List<Artist> artists = new ArrayList<>();
-            List<Track> tracks = new ArrayList<>();
+    Album entityToModel(AlbumEntity albumEntity) {
+        List<Artist> artists = new ArrayList<>();
+        List<Track> tracks = new ArrayList<>();
 
-            entity.getArtists().forEach(artistEntity -> artists.add(entityToModel(artistEntity)));
-            entity.getTracks().forEach(trackEntity -> tracks.add(entityToModel(trackEntity)));
+        albumEntity.getArtists().forEach(artistEntity -> artists.add(entityToModel(artistEntity)));
+        albumEntity.getTracks().forEach(trackEntity -> tracks.add(entityToModel(trackEntity)));
 
-            return Album.builder()
-                    .id(entity.getId())
-                    .name(entity.getName())
-                    .totalTracks(entity.getTotalTracks())
-                    .popularity(entity.getPopularity())
-                    .releaseDate(entity.getReleaseDate())
-                    .artists(artists)
-                    .tracks(tracks)
-                    .build();
-        });
+        return Album.builder()
+                .id(albumEntity.getId())
+                .name(albumEntity.getName())
+                .totalTracks(albumEntity.getTotalTracks())
+                .popularity(albumEntity.getPopularity())
+                .releaseDate(albumEntity.getReleaseDate())
+                .artists(artists)
+                .tracks(tracks)
+                .build();
     }
 
     Artist entityToModel(ArtistEntity artistEntity) {
