@@ -1,7 +1,16 @@
 package com.stgcodes.client.spotify.service;
 
+import com.stgcodes.client.spotify.entity.AlbumEntity;
+import com.stgcodes.client.spotify.entity.ArtistEntity;
+import com.stgcodes.client.spotify.entity.TrackEntity;
+import com.stgcodes.client.spotify.model.Album;
+import com.stgcodes.client.spotify.model.Artist;
+import com.stgcodes.client.spotify.model.Track;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.springframework.security.oauth2.client.web.reactive.function.client.ServerOAuth2AuthorizedClientExchangeFilterFunction.clientRegistrationId;
 
@@ -31,5 +40,46 @@ public abstract class GenericService<T, V> {
                 .attributes(clientRegistrationId("spotify"))
                 .retrieve()
                 .bodyToMono(modelWrapperType);
+    }
+
+    Mono<Album> entityToModel(Mono<AlbumEntity> albumEntity) {
+        return albumEntity.map(entity -> {
+            List<Artist> artists = new ArrayList<>();
+            List<Track> tracks = new ArrayList<>();
+
+            entity.getArtists().forEach(artistEntity -> artists.add(entityToModel(artistEntity)));
+            entity.getTracks().forEach(trackEntity -> tracks.add(entityToModel(trackEntity)));
+
+            return Album.builder()
+                    .id(entity.getId())
+                    .name(entity.getName())
+                    .totalTracks(entity.getTotalTracks())
+                    .popularity(entity.getPopularity())
+                    .releaseDate(entity.getReleaseDate())
+                    .artists(artists)
+                    .tracks(tracks)
+                    .build();
+        });
+    }
+
+    Artist entityToModel(ArtistEntity artistEntity) {
+        return Artist.builder()
+                .id(artistEntity.getId())
+                .name(artistEntity.getName())
+                .build();
+    }
+
+    Track entityToModel(TrackEntity trackEntity) {
+        List<Artist> artists = new ArrayList<>();
+        trackEntity.getArtists().forEach(artistEntity -> artists.add(entityToModel(artistEntity)));
+
+        return Track.builder()
+                .id(trackEntity.getId())
+                .name(trackEntity.getName())
+                .popularity(trackEntity.getPopularity())
+                .discNumber(trackEntity.getDiscNumber())
+                .trackNumber(trackEntity.getTrackNumber())
+                .artists(artists)
+                .build();
     }
 }
