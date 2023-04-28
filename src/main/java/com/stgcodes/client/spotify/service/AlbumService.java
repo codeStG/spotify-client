@@ -24,11 +24,10 @@ public class AlbumService extends GenericService<AlbumEntity, AlbumsWrapper> {
     }
 
     public Mono<Album> findById(String id) {
-        Mono<AlbumEntity> albumEntity = repository.findById(id)
+        return repository.findById(id)
                 .switchIfEmpty(requestSingleValue("/albums/" + id)
-                        .flatMap(repository::save));
-
-        return entityToModel(albumEntity);
+                        .flatMap(repository::save))
+                .map(this::entityToModel);
     }
 
     public Mono<List<Album>> findAll(String ids) {
