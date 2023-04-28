@@ -65,6 +65,8 @@ public abstract class GenericService<T, V> {
         return Artist.builder()
                 .id(artistEntity.getId())
                 .name(artistEntity.getName())
+                .popularity(artistEntity.getPopularity())
+                .genres(artistEntity.getGenres())
                 .build();
     }
 

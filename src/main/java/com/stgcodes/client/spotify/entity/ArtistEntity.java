@@ -18,6 +18,10 @@ public class ArtistEntity {
     @Id
     private String id;
 
+    private String name;
+
+    private int popularity;
+
     private String[] genres;
 
     @Field("external_urls")
@@ -29,10 +33,6 @@ public class ArtistEntity {
     private String href;
 
     private Object[] images;
-
-    private String name;
-
-    private int popularity;
 
     private String type;
 
