@@ -78,9 +78,17 @@ public abstract class GenericService<T, V> {
                 .popularity(trackEntity.getPopularity())
                 .discNumber(trackEntity.getDiscNumber())
                 .trackNumber(trackEntity.getTrackNumber())
-                //TODO: create simplified model classes for objects contained within objects
-//                .album(null)
+                .album(entityToSimpleModel(trackEntity.getAlbum()))
                 .artists(artists)
+                .build();
+    }
+
+    Album entityToSimpleModel(AlbumEntity albumEntity) {
+        return Album.builder()
+                .id(albumEntity.getId())
+                .name(albumEntity.getName())
+                .totalTracks(albumEntity.getTotalTracks())
+                .releaseDate(albumEntity.getReleaseDate())
                 .build();
     }
 }
