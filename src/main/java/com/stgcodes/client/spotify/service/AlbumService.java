@@ -28,39 +28,7 @@ public class AlbumService extends GenericService<AlbumEntity, AlbumsWrapper> {
                 .switchIfEmpty(requestSingleValue("/albums/" + id)
                         .flatMap(repository::save));
 
-        return entityToDto(albumEntity);
-    }
-
-    private Mono<Album> entityToDto(Mono<AlbumEntity> albumEntity) {
-        return albumEntity.map(entity -> {
-            List<Artist> artists = new ArrayList<>();
-            entity.getArtists().forEach(artistEntity -> artists.add(
-            Artist.builder()
-                    .id(artistEntity.getId())
-                    .name(artistEntity.getName())
-                    .build()));
-
-            List<Track> tracks = new ArrayList<>();
-            entity.getTracks().forEach(trackEntity -> tracks.add(
-                    Track.builder()
-                            .id(trackEntity.getId())
-                            .name(trackEntity.getName())
-                            .popularity(trackEntity.getPopularity())
-                            .discNumber(trackEntity.getDiscNumber())
-                            .trackNumber(trackEntity.getTrackNumber())
-//                            .artists(null)
-                            .build()));
-
-            return Album.builder()
-                .id(entity.getId())
-                .name(entity.getName())
-                .totalTracks(entity.getTotalTracks())
-                .popularity(entity.getPopularity())
-                .releaseDate(entity.getReleaseDate())
-                .artists(artists)
-                .tracks(tracks)
-                .build();
-        });
+        return entityToModel(albumEntity);
     }
 
     public Mono<List<Album>> findAll(String ids) {
