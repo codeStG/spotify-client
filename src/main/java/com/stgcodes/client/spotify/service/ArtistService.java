@@ -10,12 +10,12 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-public class ArtistService extends GenericService<ArtistEntity, ArtistsWrapper> {
+public class ArtistService extends GenericService<ArtistEntity> {
 
     private final ArtistRepository repository;
 
     public ArtistService(WebClient webClient, ArtistRepository repository) {
-        super(webClient, ArtistEntity.class, ArtistsWrapper.class);
+        super(webClient, ArtistEntity.class);
         this.repository = repository;
     }
 

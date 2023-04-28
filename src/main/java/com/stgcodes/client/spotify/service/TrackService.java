@@ -10,12 +10,12 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-public class TrackService extends GenericService<TrackEntity, TracksWrapper> {
+public class TrackService extends GenericService<TrackEntity> {
 
     private final TrackRepository repository;
 
     public TrackService(WebClient webClient, TrackRepository repository) {
-        super(webClient, TrackEntity.class, TracksWrapper.class);
+        super(webClient, TrackEntity.class);
         this.repository = repository;
     }
 

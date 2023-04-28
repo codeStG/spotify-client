@@ -15,16 +15,14 @@ import java.util.List;
 import static org.springframework.security.oauth2.client.web.reactive.function.client.ServerOAuth2AuthorizedClientExchangeFilterFunction.clientRegistrationId;
 
 //TODO: Extract entityToModel out to their respective service classes; make the method abstract
-public abstract class GenericService<T, V> {
+public abstract class GenericService<T> {
 
     private final WebClient webClient;
     private final Class<T> modelType;
-    private final Class<V> modelWrapperType;
 
-    GenericService(WebClient webClient, Class<T> modelType, Class<V> modelWrapperType) {
+    GenericService(WebClient webClient, Class<T> modelType) {
         this.webClient = webClient;
         this.modelType = modelType;
-        this.modelWrapperType = modelWrapperType;
     }
 
     public Mono<T> requestSingleValue(String uri) {
@@ -33,14 +31,6 @@ public abstract class GenericService<T, V> {
                 .attributes(clientRegistrationId("spotify"))
                 .retrieve()
                 .bodyToMono(modelType);
-    }
-
-    public Mono<V> requestMultipleValues(String uri) {
-        return webClient.get()
-                .uri(uri)
-                .attributes(clientRegistrationId("spotify"))
-                .retrieve()
-                .bodyToMono(modelWrapperType);
     }
 
     Album entityToModel(AlbumEntity albumEntity) {
