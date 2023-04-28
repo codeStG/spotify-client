@@ -2,16 +2,12 @@ package com.stgcodes.client.spotify.service;
 
 import com.stgcodes.client.spotify.entity.AlbumEntity;
 import com.stgcodes.client.spotify.model.Album;
-import com.stgcodes.client.spotify.model.Artist;
-import com.stgcodes.client.spotify.model.Track;
 import com.stgcodes.client.spotify.model.wrapper.AlbumsWrapper;
 import com.stgcodes.client.spotify.repository.AlbumRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class AlbumService extends GenericService<AlbumEntity, AlbumsWrapper> {
@@ -30,8 +26,8 @@ public class AlbumService extends GenericService<AlbumEntity, AlbumsWrapper> {
                 .map(this::entityToModel);
     }
 
-    public Mono<List<Album>> findAll(String ids) {
-        return requestMultipleValues("/albums?ids=" + ids)
-                .map(AlbumsWrapper::getAlbums);
+    public Flux<Album> findAll() {
+        return repository.findAll()
+                .map(this::entityToModel);
     }
 }
