@@ -38,7 +38,7 @@ public abstract class GenericService<T> {
         List<Track> tracks = new ArrayList<>();
 
         albumEntity.getArtists().forEach(artistEntity -> artists.add(entityToModel(artistEntity)));
-        albumEntity.getTracks().forEach(trackEntity -> tracks.add(entityToModel(trackEntity)));
+        albumEntity.getTracks().forEach(trackEntity -> tracks.add(entityToSimpleModel(trackEntity)));
 
         return Album.builder()
                 .id(albumEntity.getId())
@@ -76,11 +76,39 @@ public abstract class GenericService<T> {
     }
 
     Album entityToSimpleModel(AlbumEntity albumEntity) {
+        List<Artist> simpleArtists = new ArrayList<>();
+        albumEntity.getArtists().forEach(artistEntity -> simpleArtists.add(entityToSimpleModel(artistEntity)));
+
         return Album.builder()
                 .id(albumEntity.getId())
                 .name(albumEntity.getName())
                 .totalTracks(albumEntity.getTotalTracks())
                 .releaseDate(albumEntity.getReleaseDate())
+                .artists(simpleArtists)
+                .build();
+    }
+
+    Artist entityToSimpleModel(ArtistEntity artistEntity) {
+        return Artist.builder()
+                .id(artistEntity.getId())
+                .name(artistEntity.getName())
+                .build();
+    }
+
+    //TODO: Spotify API will return up to 50 tracks in an Album
+    // by default - Need to add logic to check "total" field on entity
+    // and compare to "limit" field on entity - if "total" is greater
+    // than "limit", we must gather the rest of the Tracks
+    Track entityToSimpleModel(TrackEntity trackEntity) {
+        List<Artist> simpleArtists = new ArrayList<>();
+        trackEntity.getArtists().forEach(artistEntity -> simpleArtists.add(entityToSimpleModel(artistEntity)));
+
+        return Track.builder()
+                .id(trackEntity.getId())
+                .name(trackEntity.getName())
+                .discNumber(trackEntity.getDiscNumber())
+                .trackNumber(trackEntity.getTrackNumber())
+                .artists(simpleArtists)
                 .build();
     }
 }
