@@ -2,7 +2,6 @@ package com.stgcodes.client.spotify.service;
 
 import com.stgcodes.client.spotify.entity.ArtistEntity;
 import com.stgcodes.client.spotify.model.Artist;
-import com.stgcodes.client.spotify.model.wrapper.ArtistsWrapper;
 import com.stgcodes.client.spotify.repository.ArtistRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
