@@ -22,7 +22,6 @@ public class TrackEntity {
 
     private String name;
 
-    @JsonIgnoreProperties({"tracks"})
     private AlbumEntity album;
 
     private List<ArtistEntity> artists;
