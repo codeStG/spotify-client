@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "tracks")
+@Document(collection = "track")
 public class TrackEntity {
 
     @Id
@@ -22,7 +22,6 @@ public class TrackEntity {
 
     private String name;
 
-    @JsonIgnoreProperties("tracks")
     private AlbumEntity album;
 
     private List<ArtistEntity> artists;

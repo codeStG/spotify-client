@@ -25,9 +25,9 @@ public class Album {
     @JsonFormat(pattern = "uuuu-MM-dd")
     private LocalDate releaseDate;
 
-    @JsonIgnoreProperties(value = { "popularity", "total_followers", "genres" })
+    @JsonIgnoreProperties({"popularity", "genres"})
     private List<Artist> artists;
 
-    @JsonIgnoreProperties(value = { "album", "popularity", "disc_number" })
+    @JsonIgnoreProperties(value = { "album", "popularity", "disc_number", "track_number", "artists" })
     private List<Track> tracks;
 }
