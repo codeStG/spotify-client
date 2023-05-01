@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "albums")
+@Document(collection = "album")
 public class AlbumEntity {
 
     @Id
@@ -53,6 +53,8 @@ public class AlbumEntity {
     @Field("release_date_precision")
     @JsonProperty("release_date_precision")
     private String releaseDatePrecision;
+
+    private Object restrictions;
 
     private String type;
 
