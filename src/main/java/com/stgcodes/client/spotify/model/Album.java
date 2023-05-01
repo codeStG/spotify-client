@@ -2,10 +2,8 @@ package com.stgcodes.client.spotify.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.stgcodes.client.spotify.model.wrapper.TracksWrapper;
 import lombok.Builder;
 import lombok.Data;
 
@@ -27,14 +25,9 @@ public class Album {
     @JsonFormat(pattern = "uuuu-MM-dd")
     private LocalDate releaseDate;
 
-    @JsonIgnoreProperties(value = { "popularity", "total_followers", "genres" })
+    @JsonIgnoreProperties({"popularity", "genres"})
     private List<Artist> artists;
 
-    @JsonIgnoreProperties(value = { "album", "popularity", "disc_number" })
+    @JsonIgnoreProperties(value = { "album", "popularity", "disc_number", "track_number", "artists" })
     private List<Track> tracks;
-
-    @JsonProperty("tracks")
-    private void unpackTracks(TracksWrapper tracksWrapper) {
-        this.tracks = tracksWrapper.getTracks();
-    }
 }

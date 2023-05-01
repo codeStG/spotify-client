@@ -3,6 +3,7 @@ package com.stgcodes.client.spotify.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.stgcodes.client.spotify.deserializer.CustomDateDeserializer;
+import com.stgcodes.client.spotify.model.wrapper.TracksWrapper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "albums")
+@Document(collection = "album")
 public class AlbumEntity {
 
     @Id
@@ -53,6 +54,8 @@ public class AlbumEntity {
     @JsonProperty("release_date_precision")
     private String releaseDatePrecision;
 
+    private Object restrictions;
+
     private String type;
 
     private String uri;
@@ -71,5 +74,10 @@ public class AlbumEntity {
 
     private List<ArtistEntity> artists;
 
-    private Object tracks;
+    private List<TrackEntity> tracks;
+
+    @JsonProperty("tracks")
+    private void unpackTracks(TracksWrapper tracksWrapper) {
+        this.tracks = tracksWrapper.getTracks();
+    }
 }

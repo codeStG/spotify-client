@@ -2,7 +2,6 @@ package com.stgcodes.client.spotify.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -12,11 +11,15 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "artists")
+@Document(collection = "artist")
 public class ArtistEntity {
 
     @Id
     private String id;
+
+    private String name;
+
+    private int popularity;
 
     private String[] genres;
 
@@ -29,10 +32,6 @@ public class ArtistEntity {
     private String href;
 
     private Object[] images;
-
-    private String name;
-
-    private int popularity;
 
     private String type;
 
