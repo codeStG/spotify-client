@@ -3,8 +3,6 @@ package com.stgcodes.client.spotify.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.stgcodes.client.spotify.model.simple.SimpleAlbum;
-import com.stgcodes.client.spotify.model.simple.SimpleArtist;
 import lombok.Builder;
 import lombok.Data;
 
@@ -26,7 +24,9 @@ public class Track {
 
     private int trackNumber;
 
-    private SimpleAlbum album;
+    @JsonIgnoreProperties({"total_tracks", "popularity", "release_date", "artists", "tracks"})
+    private Album album;
 
-    private List<SimpleArtist> artists;
+    @JsonIgnoreProperties({"popularity", "genres"})
+    private List<Artist> artists;
 }
