@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "artist")
+@Document
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Artist {
 

@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "track")
+@Document
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Track {
 

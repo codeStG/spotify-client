@@ -18,7 +18,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "album")
+@Document
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Album {
 
