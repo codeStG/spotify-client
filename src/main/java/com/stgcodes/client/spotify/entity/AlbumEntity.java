@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.stgcodes.client.spotify.deserializer.CustomDateDeserializer;
-import com.stgcodes.client.spotify.model.wrapper.TracksWrapper;
+import com.stgcodes.client.spotify.entity.wrapper.TracksWrapper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.stgcodes.client.spotify.model.wrapper;
+package com.stgcodes.client.spotify.entity.wrapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
