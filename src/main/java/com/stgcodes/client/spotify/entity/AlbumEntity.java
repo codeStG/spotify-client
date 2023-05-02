@@ -1,7 +1,9 @@
 package com.stgcodes.client.spotify.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.stgcodes.client.spotify.deserializer.CustomDateDeserializer;
 import com.stgcodes.client.spotify.model.wrapper.TracksWrapper;
 import lombok.AllArgsConstructor;
@@ -9,7 +11,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "album")
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AlbumEntity {
 
     @Id
@@ -25,33 +27,21 @@ public class AlbumEntity {
 
     private String name;
 
-    @Field("album_type")
-    @JsonProperty("album_type")
     private String albumType;
 
-    @Field("total_tracks")
-    @JsonProperty("total_tracks")
     private int totalTracks;
 
-    @Field("available_markets")
-    @JsonProperty("available_markets")
     private String[] availableMarkets;
 
-    @Field("external_urls")
-    @JsonProperty("external_urls")
     private Object externalUrls;
 
     private String href;
 
     private Object[] images;
 
-    @Field("release_date")
-    @JsonProperty("release_date")
     @JsonDeserialize(using = CustomDateDeserializer.class)
     private LocalDate releaseDate;
 
-    @Field("release_date_precision")
-    @JsonProperty("release_date_precision")
     private String releaseDatePrecision;
 
     private Object restrictions;
@@ -62,8 +52,6 @@ public class AlbumEntity {
 
     private Object[] copyrights;
 
-    @Field("external_ids")
-    @JsonProperty("external_ids")
     private Object externalsIds;
 
     private String[] genres;
