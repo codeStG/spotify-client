@@ -1,6 +1,6 @@
 package com.stgcodes.client.spotify.controller;
 
-import com.stgcodes.client.spotify.model.Album;
+import com.stgcodes.client.spotify.dto.AlbumDto;
 import com.stgcodes.client.spotify.service.AlbumService;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -17,13 +17,13 @@ public class AlbumController {
     }
 
     @GetMapping("/{id}")
-    @ResponseBody Mono<Album>
+    @ResponseBody Mono<AlbumDto>
     findById(@PathVariable String id) {
         return service.findById(id);
     }
 
     @GetMapping
-    @ResponseBody Flux<Album>
+    @ResponseBody Flux<AlbumDto>
     findAll() {
         return service.findAll();
     }

@@ -1,8 +1,6 @@
-package com.stgcodes.client.spotify.model;
+package com.stgcodes.client.spotify.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,9 +8,8 @@ import java.util.List;
 
 @Data
 @Builder
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Track {
+public class TrackDto {
 
     private String id;
 
@@ -25,8 +22,8 @@ public class Track {
     private int trackNumber;
 
     @JsonIgnoreProperties({"total_tracks", "popularity", "release_date", "artists", "tracks"})
-    private Album album;
+    private AlbumDto album;
 
     @JsonIgnoreProperties({"popularity", "genres"})
-    private List<Artist> artists;
+    private List<ArtistDto> artists;
 }

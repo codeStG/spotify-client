@@ -1,6 +1,6 @@
 package com.stgcodes.client.spotify.controller;
 
-import com.stgcodes.client.spotify.model.Track;
+import com.stgcodes.client.spotify.dto.TrackDto;
 import com.stgcodes.client.spotify.service.TrackService;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -17,13 +17,13 @@ public class TrackController {
     }
 
     @GetMapping("/{id}")
-    @ResponseBody Mono<Track>
+    @ResponseBody Mono<TrackDto>
     findById(@PathVariable String id) {
         return service.findById(id);
     }
 
     @GetMapping
-    @ResponseBody Flux<Track>
+    @ResponseBody Flux<TrackDto>
     findAll() {
         return service.findAll();
     }

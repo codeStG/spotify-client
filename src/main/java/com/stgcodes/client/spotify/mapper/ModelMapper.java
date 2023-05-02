@@ -1,16 +1,16 @@
 package com.stgcodes.client.spotify.mapper;
 
-import com.stgcodes.client.spotify.entity.AlbumEntity;
-import com.stgcodes.client.spotify.entity.ArtistEntity;
-import com.stgcodes.client.spotify.entity.TrackEntity;
-import com.stgcodes.client.spotify.model.Album;
-import com.stgcodes.client.spotify.model.Artist;
-import com.stgcodes.client.spotify.model.Track;
+import com.stgcodes.client.spotify.dto.ArtistDto;
+import com.stgcodes.client.spotify.dto.TrackDto;
+import com.stgcodes.client.spotify.entity.Album;
+import com.stgcodes.client.spotify.entity.Artist;
+import com.stgcodes.client.spotify.entity.Track;
+import com.stgcodes.client.spotify.dto.AlbumDto;
 import org.mapstruct.Mapper;
 
 @Mapper
 public interface ModelMapper {
-    Album albumEntityToAlbum(AlbumEntity entity);
-    Artist artistEntityToArtist(ArtistEntity entity);
-    Track trackEntityToTrack(TrackEntity entity);
+    AlbumDto albumEntityToAlbum(Album entity);
+    ArtistDto artistEntityToArtist(Artist entity);
+    TrackDto trackEntityToTrack(Track entity);
 }
