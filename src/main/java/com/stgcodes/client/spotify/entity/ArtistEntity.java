@@ -1,17 +1,18 @@
 package com.stgcodes.client.spotify.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "artist")
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ArtistEntity {
 
     @Id
@@ -23,8 +24,6 @@ public class ArtistEntity {
 
     private String[] genres;
 
-    @Field("external_urls")
-    @JsonProperty("external_urls")
     private Object externalUrls;
 
     private Object followers;
