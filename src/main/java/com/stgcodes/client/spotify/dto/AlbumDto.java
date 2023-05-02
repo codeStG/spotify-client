@@ -1,4 +1,4 @@
-package com.stgcodes.client.spotify.model;
+package com.stgcodes.client.spotify.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class Album {
+public class AlbumDto {
     private String id;
 
     private String name;
@@ -23,8 +23,8 @@ public class Album {
     private LocalDate releaseDate;
 
     @JsonIgnoreProperties({"popularity", "genres"})
-    private List<Artist> artists;
+    private List<ArtistDto> artists;
 
     @JsonIgnoreProperties(value = { "album", "popularity", "disc_number", "track_number", "artists" })
-    private List<Track> tracks;
+    private List<TrackDto> tracks;
 }

@@ -15,16 +15,16 @@ import java.util.List;
 @AllArgsConstructor
 @Document(collection = "track")
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class TrackEntity {
+public class Track {
 
     @Id
     private String id;
 
     private String name;
 
-    private AlbumEntity album;
+    private Album album;
 
-    private List<ArtistEntity> artists;
+    private List<Artist> artists;
 
     private int popularity;
 

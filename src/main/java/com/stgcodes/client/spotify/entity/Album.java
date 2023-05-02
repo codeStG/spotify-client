@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @Document(collection = "album")
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class AlbumEntity {
+public class Album {
 
     @Id
     private String id;
@@ -60,9 +60,9 @@ public class AlbumEntity {
 
     private int popularity;
 
-    private List<ArtistEntity> artists;
+    private List<Artist> artists;
 
-    private List<TrackEntity> tracks;
+    private List<Track> tracks;
 
     @JsonProperty("tracks")
     private void unpackTracks(TracksWrapper tracksWrapper) {

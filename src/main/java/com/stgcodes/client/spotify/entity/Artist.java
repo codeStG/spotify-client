@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Document(collection = "artist")
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class ArtistEntity {
+public class Artist {
 
     @Id
     private String id;
