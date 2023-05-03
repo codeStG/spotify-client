@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ArtistWrapper {
+public class ArtistsWrapper {
 
     private List<Artist> artists;
 
