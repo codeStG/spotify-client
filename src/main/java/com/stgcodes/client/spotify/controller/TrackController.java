@@ -2,7 +2,7 @@ package com.stgcodes.client.spotify.controller;
 
 import com.stgcodes.client.spotify.dto.TrackDto;
 import com.stgcodes.client.spotify.service.TrackService;
-gitimport org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -28,7 +28,7 @@ public class TrackController {
         return service.findAll();
     }
 
-    @GetMapping({"/top{num}","/top"})
+    @GetMapping("/top")
     @ResponseBody Flux<TrackDto>
     findTopTen() {
         return service.findTopTen();
