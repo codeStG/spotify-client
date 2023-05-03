@@ -27,4 +27,10 @@ public class ArtistController {
     findAll() {
         return service.findAll();
     }
+
+    @GetMapping("/top")
+    @ResponseBody Flux<ArtistDto>
+    findTopTen() {
+        return service.findTopTen();
+    }
 }
