@@ -27,4 +27,10 @@ public class TrackController {
     findAll() {
         return service.findAll();
     }
+
+    @GetMapping("/top")
+    @ResponseBody Flux<TrackDto>
+    findTopTen() {
+        return service.findTopTen();
+    }
 }
