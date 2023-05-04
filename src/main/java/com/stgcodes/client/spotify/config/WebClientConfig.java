@@ -1,6 +1,7 @@
 package com.stgcodes.client.spotify.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.client.ReactiveOAuth2AuthorizedClientManager;
@@ -12,12 +13,15 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class WebClientConfig {
 
+    @Value("${spotify.base-url}")
+    private String baseUrl;
+
     @Bean
     WebClient webClient(ReactiveOAuth2AuthorizedClientManager authorizedClientManager) {
         ServerOAuth2AuthorizedClientExchangeFilterFunction oauth2Client = new ServerOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager);
 
         return WebClient.builder()
-                .baseUrl("https://api.spotify.com/v1/")
+                .baseUrl(baseUrl)
                 .filter(oauth2Client)
                 .filter(logFilter())
                 .build();
