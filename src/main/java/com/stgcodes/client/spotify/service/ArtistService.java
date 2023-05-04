@@ -6,6 +6,7 @@ import com.stgcodes.client.spotify.entity.wrapper.ArtistsWrapper;
 import com.stgcodes.client.spotify.mapper.ModelMapper;
 import com.stgcodes.client.spotify.repository.ArtistRepository;
 import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -20,6 +21,12 @@ public class ArtistService extends GenericService<Artist> {
     private final ArtistRepository repository;
     private final ModelMapper mapper = Mappers.getMapper(ModelMapper.class);
 
+    @Value("${spotify.uri.artists}")
+    private String artistsUri;
+
+    @Value("${spotify.uri.artists.top-ten}")
+    private String topArtistsUri;
+
     public ArtistService(WebClient webClient, ArtistRepository repository) {
         super(webClient, Artist.class);
         this.webClient = webClient;
@@ -28,7 +35,7 @@ public class ArtistService extends GenericService<Artist> {
 
     public Mono<ArtistDto> findById(String id) {
         return repository.findById(id)
-                .switchIfEmpty(requestSingleValue("/artists/" + id))
+                .switchIfEmpty(requestSingleValue(artistsUri + id))
                     .flatMap(repository::save)
                 .map(mapper::artistEntityToArtist);
     }
@@ -40,7 +47,7 @@ public class ArtistService extends GenericService<Artist> {
 
     public Flux<ArtistDto> findTopTen() {
         return webClient.get()
-                .uri("/me/top/artists?limit=10")
+                .uri(topArtistsUri)
                 .attributes(clientRegistrationId("spotify"))
                 .retrieve()
                 .bodyToFlux(ArtistsWrapper.class)

@@ -24,6 +24,9 @@ public class TrackService extends GenericService<Track> {
     @Value("${spotify.uri.tracks}")
     private String tracksUri;
 
+    @Value("${spotify.uri.tracks.top-ten}")
+    private String topTracksUri;
+
     public TrackService(WebClient webClient, TrackRepository repository) {
         super(webClient, Track.class);
         this.webClient = webClient;
@@ -44,7 +47,7 @@ public class TrackService extends GenericService<Track> {
 
     public Flux<TrackDto> findTopTen() {
         return webClient.get()
-                .uri("/me/top/tracks?limit=10")
+                .uri(topTracksUri)
                 .attributes(clientRegistrationId("spotify"))
                 .retrieve()
                 .bodyToFlux(TracksWrapper.class)
