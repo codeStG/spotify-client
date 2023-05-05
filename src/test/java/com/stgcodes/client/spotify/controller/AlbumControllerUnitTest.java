@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 
 @WebFluxTest(controllers = AlbumController.class)
 @AutoConfigureWebTestClient
-class AlbumControllerTest {
+class AlbumControllerUnitTest {
 
     @Autowired
     private WebTestClient webTestClient;
