@@ -7,11 +7,8 @@ import com.stgcodes.client.spotify.service.AlbumService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
-import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -36,8 +33,6 @@ class AlbumControllerUnitTest {
 
     private WebTestClient webTestClient;
 
-    private final String TEST_ID = "0x06iiRmDrPpU1Wlo5MHoz";
-
     private AlbumDto testAlbumDto;
 
     private List<AlbumDto> testAlbumDtoList;
@@ -60,18 +55,19 @@ class AlbumControllerUnitTest {
 
     @Test
     void findById() {
-        when(serviceMock.findById(TEST_ID)).thenReturn(Mono.just(testAlbumDto));
+        String testId = "0x06iiRmDrPpU1Wlo5MHoz";
+        when(serviceMock.findById(testId)).thenReturn(Mono.just(testAlbumDto));
 
         webTestClient
                 .get()
-                .uri("/album/" + TEST_ID)
+                .uri("/album/" + testId)
                 .exchange()
                 .expectStatus()
                 .is2xxSuccessful()
                 .expectBody(AlbumDto.class)
                 .isEqualTo(testAlbumDto);
 
-        verify(serviceMock).findById(TEST_ID);
+        verify(serviceMock).findById(testId);
     }
 
     @Test
