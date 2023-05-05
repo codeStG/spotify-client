@@ -1,6 +1,5 @@
 package com.stgcodes.client.spotify.dto;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data
