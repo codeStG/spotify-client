@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
@@ -33,13 +34,19 @@ class AlbumControllerUnitTest {
     @MockBean
     private AlbumService serviceMock;
 
+    private WebTestClient webTestClient;
+
     private final String TEST_ID = "0x06iiRmDrPpU1Wlo5MHoz";
 
     private AlbumDto testAlbumDto;
 
+    private List<AlbumDto> testAlbumDtoList;
+
     @BeforeEach
     void setup() {
+        webTestClient = WebTestClient.bindToController(albumController).build();
         testAlbumDto = new AlbumDto();
+
         testAlbumDto.setId("0");
         testAlbumDto.setName("Some Name");
         testAlbumDto.setTotalTracks(0);
@@ -47,15 +54,15 @@ class AlbumControllerUnitTest {
         testAlbumDto.setReleaseDate(LocalDate.now());
         testAlbumDto.setArtists(List.of(new ArtistDto()));
         testAlbumDto.setTracks(List.of(new TrackDto()));
+
+        testAlbumDtoList = List.of(testAlbumDto, new AlbumDto());
     }
 
     @Test
     void findById() {
         when(serviceMock.findById(TEST_ID)).thenReturn(Mono.just(testAlbumDto));
 
-        WebTestClient
-                .bindToController(albumController)
-                .build()
+        webTestClient
                 .get()
                 .uri("/album/" + TEST_ID)
                 .exchange()
@@ -65,5 +72,22 @@ class AlbumControllerUnitTest {
                 .isEqualTo(testAlbumDto);
 
         verify(serviceMock).findById(TEST_ID);
+    }
+
+    @Test
+    void findAll() {
+        when(serviceMock.findAll()).thenReturn(Flux.fromIterable(testAlbumDtoList));
+
+        webTestClient
+                .get()
+                .uri("/album")
+                .exchange()
+                .expectStatus()
+                .is2xxSuccessful()
+                .expectBodyList(AlbumDto.class)
+                .isEqualTo(testAlbumDtoList);
+
+        verify(serviceMock).findAll();
+
     }
 }
