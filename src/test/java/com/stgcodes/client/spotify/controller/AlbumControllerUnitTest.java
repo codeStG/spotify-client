@@ -55,7 +55,7 @@ class AlbumControllerUnitTest {
 
     @Test
     void findById() {
-        String testId = "0x06iiRmDrPpU1Wlo5MHoz";
+        String testId = "0";
         when(serviceMock.findById(testId)).thenReturn(Mono.just(testAlbumDto));
 
         webTestClient
