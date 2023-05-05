@@ -7,7 +7,6 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TrackDto {
 
