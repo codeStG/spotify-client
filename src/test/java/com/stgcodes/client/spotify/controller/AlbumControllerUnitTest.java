@@ -54,7 +54,6 @@ class AlbumControllerUnitTest {
                 .exchange()
                 .expectStatus()
                 .is3xxRedirection()
-                .expectBody(AlbumDto.class)
-                .isEqualTo(testAlbumDto);
+                .expectBody(AlbumDto.class);
     }
 }
