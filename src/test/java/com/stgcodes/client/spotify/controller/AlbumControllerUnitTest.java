@@ -9,51 +9,61 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@WebFluxTest(controllers = AlbumController.class)
-@AutoConfigureWebTestClient
+@SpringBootTest(classes = {
+        AlbumController.class,
+        AlbumService.class
+})
 class AlbumControllerUnitTest {
 
     @Autowired
-    private WebTestClient webTestClient;
+    private AlbumController albumController;
 
     @MockBean
     private AlbumService serviceMock;
 
-    private String testId = "0x06iiRmDrPpU1Wlo5MHoz";
+    private final String TEST_ID = "0x06iiRmDrPpU1Wlo5MHoz";
 
     private AlbumDto testAlbumDto;
 
     @BeforeEach
     void setup() {
-        testAlbumDto = AlbumDto.builder()
-                .id(testId)
-                .name("Trillstatik 2")
-                .totalTracks(10)
-                .popularity(26)
-                .releaseDate(LocalDate.now())
-                .artists(List.of(ArtistDto.builder().build()))
-                .tracks(List.of(TrackDto.builder().build()))
-                .build();
+        testAlbumDto = new AlbumDto();
+        testAlbumDto.setId("0");
+        testAlbumDto.setName("Some Name");
+        testAlbumDto.setTotalTracks(0);
+        testAlbumDto.setPopularity(99);
+        testAlbumDto.setReleaseDate(LocalDate.now());
+        testAlbumDto.setArtists(List.of(new ArtistDto()));
+        testAlbumDto.setTracks(List.of(new TrackDto()));
     }
 
     @Test
     void findById() {
-        when(serviceMock.findById(testId)).thenReturn(Mono.just(testAlbumDto));
+        when(serviceMock.findById(TEST_ID)).thenReturn(Mono.just(testAlbumDto));
 
-        webTestClient.get()
-                .uri("/album/{testId}", testId)
+        WebTestClient
+                .bindToController(albumController)
+                .build()
+                .get()
+                .uri("/album/" + TEST_ID)
                 .exchange()
                 .expectStatus()
-                .is3xxRedirection()
-                .expectBody(AlbumDto.class);
+                .is2xxSuccessful()
+                .expectBody(AlbumDto.class)
+                .isEqualTo(testAlbumDto);
+
+        verify(serviceMock).findById(TEST_ID);
     }
 }
