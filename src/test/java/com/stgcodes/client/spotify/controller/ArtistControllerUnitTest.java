@@ -78,6 +78,21 @@ class ArtistControllerTest {
                 .isEqualTo(testArtistDtoList);
 
         verify(serviceMock).findAll();
+    }
 
+    @Test
+    void findTop() {
+        when(serviceMock.findTopTen()).thenReturn(Flux.fromIterable(testArtistDtoList));
+
+        webTestClient
+                .get()
+                .uri("/artist/top")
+                .exchange()
+                .expectStatus()
+                .is2xxSuccessful()
+                .expectBodyList(ArtistDto.class)
+                .isEqualTo(testArtistDtoList);
+
+        verify(serviceMock).findTopTen();
     }
 }
