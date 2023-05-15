@@ -29,15 +29,21 @@ class AlbumServiceUnitTest {
     private AlbumService service;
 
     private Album testAlbum;
+    private Album testAlbum2;
     private AlbumDto testAlbumDto;
+    private AlbumDto testAlbumDto2;
 
     @BeforeEach
     void setUp() {
         testAlbum = new Album();
-        testAlbum.setId("0");
-
+        testAlbum2 = new Album();
         testAlbumDto = new AlbumDto();
+        testAlbumDto2 = new AlbumDto();
+
+        testAlbum.setId("0");
         testAlbumDto.setId("0");
+        testAlbum2.setId("1");
+        testAlbumDto2.setId("1");
     }
 
     @Test
@@ -55,12 +61,6 @@ class AlbumServiceUnitTest {
 
     @Test
     void findAll() {
-        Album testAlbum2 = new Album();
-        testAlbum2.setId("1");
-
-        AlbumDto testAlbumDto2 = new AlbumDto();
-        testAlbumDto2.setId("1");
-
         given(repositoryMock.findAll()).willReturn(Flux.fromIterable(List.of(testAlbum, testAlbum2)));
 
         StepVerifier.create(service.findAll())
