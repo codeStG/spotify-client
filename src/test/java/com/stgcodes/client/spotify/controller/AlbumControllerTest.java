@@ -40,17 +40,17 @@ class AlbumControllerTest {
     @BeforeEach
     void setup() {
         webTestClient = WebTestClient.bindToController(albumController).build();
-        testAlbumDto = new AlbumDto();
+        testAlbumDto = AlbumDto.builder()
+                .id("0")
+                .name("Some Name")
+                .totalTracks(0)
+                .popularity(99)
+                .releaseDate(LocalDate.now())
+                .artists(List.of(new ArtistDto()))
+                .tracks(List.of(new TrackDto()))
+                .build();
 
-        testAlbumDto.setId("0");
-        testAlbumDto.setName("Some Name");
-        testAlbumDto.setTotalTracks(0);
-        testAlbumDto.setPopularity(99);
-        testAlbumDto.setReleaseDate(LocalDate.now());
-        testAlbumDto.setArtists(List.of(new ArtistDto()));
-        testAlbumDto.setTracks(List.of(new TrackDto()));
-
-        testAlbumDtoList = List.of(testAlbumDto, new AlbumDto());
+        testAlbumDtoList = List.of(testAlbumDto, AlbumDto.builder().build());
     }
 
     @Test
