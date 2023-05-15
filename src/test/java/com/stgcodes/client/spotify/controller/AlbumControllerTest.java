@@ -46,7 +46,7 @@ class AlbumControllerTest {
                 .totalTracks(0)
                 .popularity(99)
                 .releaseDate(LocalDate.now())
-                .artists(List.of(new ArtistDto()))
+                .artists(List.of(ArtistDto.builder().build()))
                 .tracks(List.of(new TrackDto()))
                 .build();
 

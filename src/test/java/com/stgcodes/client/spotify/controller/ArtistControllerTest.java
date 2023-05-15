@@ -37,14 +37,14 @@ class ArtistControllerTest {
     @BeforeEach
     void setup() {
         webTestClient = WebTestClient.bindToController(artistController).build();
-        testArtistDto = new ArtistDto();
+        testArtistDto = ArtistDto.builder()
+                .id("0")
+                .name("Some Name")
+                .popularity(99)
+                .genres(new String[1])
+                .build();
 
-        testArtistDto.setId("0");
-        testArtistDto.setName("Some Name");
-        testArtistDto.setPopularity(99);
-        testArtistDto.setGenres(new String[1]);
-
-        testArtistDtoList = List.of(testArtistDto, new ArtistDto());
+        testArtistDtoList = List.of(testArtistDto, ArtistDto.builder().build());
     }
 
     @Test

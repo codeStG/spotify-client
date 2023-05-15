@@ -47,7 +47,7 @@ class TrackControllerTest {
         testTrackDto.setDiscNumber(1);
         testTrackDto.setTrackNumber(1);
         testTrackDto.setAlbum(AlbumDto.builder().build());
-        testTrackDto.setArtists(List.of(new ArtistDto()));
+        testTrackDto.setArtists(List.of(ArtistDto.builder().build()));
 
         testTrackDtoList = List.of(testTrackDto, new TrackDto());
     }
