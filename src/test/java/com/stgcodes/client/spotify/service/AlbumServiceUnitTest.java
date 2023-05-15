@@ -10,8 +10,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
+
+import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -48,5 +51,23 @@ class AlbumServiceUnitTest {
                                 .verifyComplete();
 
         verify(repositoryMock).findById(testId);
+    }
+
+    @Test
+    void findAll() {
+        Album testAlbum2 = new Album();
+        testAlbum2.setId("1");
+
+        AlbumDto testAlbumDto2 = new AlbumDto();
+        testAlbumDto2.setId("1");
+
+        given(repositoryMock.findAll()).willReturn(Flux.fromIterable(List.of(testAlbum, testAlbum2)));
+
+        StepVerifier.create(service.findAll())
+                .expectNext(testAlbumDto)
+                .expectNext(testAlbumDto2)
+                .verifyComplete();
+
+        verify(repositoryMock).findAll();
     }
 }
