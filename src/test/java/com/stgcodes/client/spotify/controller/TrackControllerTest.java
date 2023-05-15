@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
         TrackController.class,
         TrackService.class
 })
-class TrackControllerUnitTest {
+class TrackControllerTest {
 
     @Autowired
     private TrackController trackController;

@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
         AlbumController.class,
         AlbumService.class
 })
-class AlbumControllerUnitTest {
+class AlbumControllerTest {
 
     @Autowired
     private AlbumController albumController;

@@ -3,7 +3,6 @@ package com.stgcodes.client.spotify.service;
 import com.stgcodes.client.spotify.dto.AlbumDto;
 import com.stgcodes.client.spotify.entity.Album;
 import com.stgcodes.client.spotify.repository.AlbumRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +19,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class AlbumServiceUnitTest {
+class AlbumServiceTest {
 
     @Mock
     private AlbumRepository repositoryMock;

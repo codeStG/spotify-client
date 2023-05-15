@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
         ArtistController.class,
         ArtistService.class
 })
-class ArtistControllerUnitTest {
+class ArtistControllerTest {
 
     @Autowired
     private ArtistController artistController;
