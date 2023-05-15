@@ -27,7 +27,7 @@ public class AlbumService extends GenericService<Album> {
 
     public Mono<AlbumDto> findById(String id) {
         return repository.findById(id)
-                .switchIfEmpty(requestSingleValue(albumsUri + id)
+                .switchIfEmpty(Mono.defer(() -> requestSingleValue(albumsUri + id))
                         .flatMap(repository::save))
                 .mapNotNull(mapper::albumEntityToAlbum);
     }
