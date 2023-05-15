@@ -34,15 +34,10 @@ class AlbumServiceTest {
 
     @BeforeEach
     void setUp() {
-        testAlbum = new Album();
-        testAlbum2 = new Album();
-        testAlbumDto = new AlbumDto();
-        testAlbumDto2 = new AlbumDto();
-
-        testAlbum.setId("0");
-        testAlbumDto.setId("0");
-        testAlbum2.setId("1");
-        testAlbumDto2.setId("1");
+        testAlbum = Album.builder().id("0").build();
+        testAlbum2 = Album.builder().id("1").build();
+        testAlbumDto = AlbumDto.builder().id("0").build();
+        testAlbumDto2 = AlbumDto.builder().id("1").build();
     }
 
     @Test
