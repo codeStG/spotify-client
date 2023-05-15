@@ -46,7 +46,7 @@ class TrackControllerTest {
         testTrackDto.setPopularity(99);
         testTrackDto.setDiscNumber(1);
         testTrackDto.setTrackNumber(1);
-        testTrackDto.setAlbum(new AlbumDto());
+        testTrackDto.setAlbum(AlbumDto.builder().build());
         testTrackDto.setArtists(List.of(new ArtistDto()));
 
         testTrackDtoList = List.of(testTrackDto, new TrackDto());
