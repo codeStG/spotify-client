@@ -47,7 +47,7 @@ class AlbumControllerTest {
                 .popularity(99)
                 .releaseDate(LocalDate.now())
                 .artists(List.of(ArtistDto.builder().build()))
-                .tracks(List.of(new TrackDto()))
+                .tracks(List.of(TrackDto.builder().build()))
                 .build();
 
         testAlbumDtoList = List.of(testAlbumDto, AlbumDto.builder().build());

@@ -39,17 +39,17 @@ class TrackControllerTest {
     @BeforeEach
     void setup() {
         webTestClient = WebTestClient.bindToController(trackController).build();
-        testTrackDto = new TrackDto();
+        testTrackDto = TrackDto.builder()
+                .id("0")
+                .name("Some Name")
+                .popularity(99)
+                .discNumber(1)
+                .trackNumber(1)
+                .album(AlbumDto.builder().build())
+                .artists(List.of(ArtistDto.builder().build()))
+                .build();
 
-        testTrackDto.setId("0");
-        testTrackDto.setName("Some Name");
-        testTrackDto.setPopularity(99);
-        testTrackDto.setDiscNumber(1);
-        testTrackDto.setTrackNumber(1);
-        testTrackDto.setAlbum(AlbumDto.builder().build());
-        testTrackDto.setArtists(List.of(ArtistDto.builder().build()));
-
-        testTrackDtoList = List.of(testTrackDto, new TrackDto());
+        testTrackDtoList = List.of(testTrackDto, TrackDto.builder().build());
     }
 
     @Test
