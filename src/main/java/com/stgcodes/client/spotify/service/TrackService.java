@@ -35,7 +35,7 @@ public class TrackService extends GenericService<Track> {
 
     public Mono<TrackDto> findById(String id) {
         return repository.findById(id)
-                .switchIfEmpty(requestSingleValue(tracksUri + id)
+                .switchIfEmpty(Mono.defer(() -> requestSingleValue(tracksUri + id))
                     .flatMap(repository::save))
                 .map(mapper::trackEntityToTrack);
     }
