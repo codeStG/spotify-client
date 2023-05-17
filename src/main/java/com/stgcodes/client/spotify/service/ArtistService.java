@@ -35,8 +35,8 @@ public class ArtistService extends GenericService<Artist> {
 
     public Mono<ArtistDto> findById(String id) {
         return repository.findById(id)
-                .switchIfEmpty(requestSingleValue(artistsUri + id))
-                    .flatMap(repository::save)
+                .switchIfEmpty(Mono.defer(() -> requestSingleValue(artistsUri + id))
+                    .flatMap(repository::save))
                 .map(mapper::artistEntityToArtist);
     }
 
