@@ -16,19 +16,19 @@ public class TrackController {
         this.service = service;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping({"/{id}", "/{id}/"})
     @ResponseBody Mono<TrackDto>
     findById(@PathVariable String id) {
         return service.findById(id);
     }
 
-    @GetMapping
+    @GetMapping({"", "/"})
     @ResponseBody Flux<TrackDto>
     findAll() {
         return service.findAll();
     }
 
-    @GetMapping("/top")
+    @GetMapping({"/top", "/top/"})
     @ResponseBody Flux<TrackDto>
     findTopTen() {
         return service.findTopTen();
