@@ -16,13 +16,13 @@ public class AlbumController {
         this.service = service;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping({"/{id}", "/{id}/"})
     @ResponseBody Mono<AlbumDto>
     findById(@PathVariable String id) {
         return service.findById(id);
     }
 
-    @GetMapping
+    @GetMapping({"", "/"})
     @ResponseBody Flux<AlbumDto>
     findAll() {
         return service.findAll();

@@ -16,19 +16,19 @@ public class ArtistController {
         this.service = service;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping({"/{id}", "/{id}/"})
     @ResponseBody Mono<ArtistDto>
     findById(@PathVariable String id) {
         return service.findById(id);
     }
 
-    @GetMapping
+    @GetMapping({"", "/"})
     @ResponseBody Flux<ArtistDto>
     findAll() {
         return service.findAll();
     }
 
-    @GetMapping("/top")
+    @GetMapping({"/top", "/top/"})
     @ResponseBody Flux<ArtistDto>
     findTopTen() {
         return service.findTopTen();
